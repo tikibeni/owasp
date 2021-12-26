@@ -7,18 +7,19 @@ https://owasp.org/www-project-top-ten/) inside this template project, from which
 
 ## Installation guide
 
-1. Clone the project via command line:
+1. Clone:
 
-    ``git clone git@github.com:tikibeni/owasp.git``
-    
-    or
-    
-    ``git clone https://github.com/tikibeni/owasp.git``
+```shell
+   ~$ git clone git@github.com:tikibeni/owasp.git
+   ~$ cd owasp
+   ~/owasp$ 
+```
 
-2. Run the application within the project folder
+3. Migrate & run:
 
-    ``python manage.py migrate``
+```shell
+   ~/owasp$ python manage.py migrate
+   ~/owasp$ python manage.py runserver   
+```
    
-    ``python manage.py runserver``
-   
-3. Open the app via browser. Application url can be found from the console.
+4. Open the app via browser. Localhost URL can be found from the console output.
