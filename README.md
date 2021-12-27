@@ -26,5 +26,14 @@ https://owasp.org/www-project-top-ten/) inside this template project, from which
 
 ### Dependencies
 
-You will need Python 3.x.y and Django. I used Python [3.9.5](https://www.python.org/downloads/release/python-395/) 
+You will need Python 3.x.y and Django. I used Python [3.9.5](https://www.python.org/downloads/release/python-395/)
 and Django [4.0](https://docs.djangoproject.com/en/4.0/releases/4.0/).
+
+## Usage
+
+### Login credentials
+
+| role          | username | password |
+|---------------|----------|----------|
+| administrator | admin    | admin    |
+|               |          |          |
