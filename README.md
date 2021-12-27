@@ -10,16 +10,21 @@ https://owasp.org/www-project-top-ten/) inside this template project, from which
 1. Clone:
 
 ```shell
-   ~$ git clone git@github.com:tikibeni/owasp.git
-   ~$ cd owasp
-   ~/owasp$ 
+~$ git clone git@github.com:tikibeni/owasp.git
+~$ cd owasp
+~/owasp$ 
 ```
 
 3. Migrate & run:
 
 ```shell
-   ~/owasp$ python manage.py migrate
-   ~/owasp$ python manage.py runserver   
+~/owasp$ python manage.py migrate
+~/owasp$ python manage.py runserver   
 ```
    
 4. Open the app via browser. Localhost URL can be found from the console output.
+
+### Dependencies
+
+You will need Python 3.x.y and Django. I used Python [3.9.5](https://www.python.org/downloads/release/python-395/) 
+and Django [4.0](https://docs.djangoproject.com/en/4.0/releases/4.0/).
