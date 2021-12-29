@@ -1,14 +1,37 @@
-# Five OWASP-10 Flaws
+# Six OWASP-10 (2021) Flaws
 
-Here I have listed the security flaws inside the application.
+Here I have listed six security flaws inside the application.
 
 ---
 
 ## [A02:2021-Cryptographic Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)
 
-Using HTTP instead of HTTPS.
+*Location:* Overall backend [settings & configuration](../mysite).
 
-No cryptographic algorithms for passwords.
+*Description:* The application uses HTTP instead of HTTPS. Therefore, the data transmitted via HTTP is not encrypted
+anyhow and can be seen as clear text. In addition, it is not clear if the backend uses any hashing algorithms for the
+user credentials. Using HTTPS might also prevent cases of A07:2021.
+
+*Fix:* Switch to HTTPS, secure cookies and use up-to-date hashing algorithms. Here are some steps:
+
+[settings.py](../mysite/settings.py):
+```python
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+```
+
+The `x_COOKIE_SECURE` marks the desired cookie as `secure` thus making it transmittable only via HTTPS.
+
+When enabled, the `SECURE_SSL_REDIRECT` will tell the SecurityMiddleware to redirect all non-HTTPS requests
+to HTTPS.
+
+[wsgi.py](../mysite/wsgi.py):
+```python
+os.environ['HTTPS'] = 'on'
+```
+
+Just sets the environmental value of HTTPS to true.
 
 ---
 
@@ -24,7 +47,8 @@ Injection info goes here. Also XSS belongs here.
 
 *Description:* The secret key used in production is not protected in any way and this repository is
 public. Also, if this application would be running in development, the debug-mode is left on. The debug-mode
-could enable the visibility of private information for example through console logs.
+could enable the visibility of private information for example through console logs. In addition, debug-mode will consume
+much more memory on a production server.
 
 *Fix:* Remove the secret key from the version control and start using some library, which handles environmental 
 variables, such as [dotenv](https://pypi.org/project/python-dotenv/). Also disable debug-mode in production and leave 
