@@ -1,6 +1,7 @@
 # Six OWASP-10 (2021) Flaws
 
-Here I have listed six security flaws inside the application.
+Here I have listed six security flaws inside the Python-Django template application some of which are implicitly created
+and some of which are already inside the template.
 
 ---
 
@@ -9,8 +10,8 @@ Here I have listed six security flaws inside the application.
 *Location:* Overall backend [settings & configuration](../mysite).
 
 *Description:* The application uses HTTP instead of HTTPS. Therefore, the data transmitted via HTTP is not encrypted
-anyhow and can be seen as clear text. In addition, it is not clear if the backend uses any hashing algorithms for the
-user credentials. Using HTTPS might also prevent cases of A07:2021.
+anyhow and can be seen as clear text. This enables man-in-the-middle attacks. In addition, it is not clear if the 
+backend uses any hashing algorithms for the user credentials. Using HTTPS might also prevent cases of A07:2021.
 
 *Fix:* Switch to HTTPS, secure cookies and use up-to-date hashing algorithms. Here are some steps:
 
@@ -21,7 +22,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 ```
 
-The `x_COOKIE_SECURE` marks the desired cookie as `secure` thus making it transmittable only via HTTPS.
+The `X_COOKIE_SECURE` marks the desired cookie as `secure` thus making it transmittable only via HTTPS.
 
 When enabled, the `SECURE_SSL_REDIRECT` will tell the SecurityMiddleware to redirect all non-HTTPS requests
 to HTTPS.
@@ -58,7 +59,17 @@ the mode managing to dotenv.
 
 ## [A05:2021-Security Misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
 
-Default accounts and their passwords are still enabled and unchanged.
+*Location:* The database.
+
+*Description:* One of the listed security misconfigurations is "Default accounts and their passwords are still enabled
+and unchanged." This template application utilizes a superuser with default credentials, which are: username "admin" and
+password "admin". Default credentials greatly increase the risk of account theft and cases of A06.
+
+*Fix:* Never use default credentials. I forcefully created a superuser with default credentials even though the
+framework said it's not a good idea. Use usernames & passwords with special characters, different capitalizations and
+numbers. One efficient way of ensuring strong credentials is using a password handling program, such as F-Secure ID
+Protection.
+
 
 The software is out of date or vulnerable (A06)
 
