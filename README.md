@@ -18,11 +18,11 @@ https://owasp.org/www-project-top-ten/) inside this template project, from which
 3. Migrate & run:
 
 ```shell
-~/owasp$ python manage.py migrate
-~/owasp$ python manage.py runserver   
+~/owasp$ python3 manage.py migrate
+~/owasp$ python3 manage.py runserver   
 ```
    
-4. Open the app via browser. Localhost URL can be found from the console output.
+4. Open the frontend via browser within: http://127.0.0.1:8000/
 
 ### Dependencies
 

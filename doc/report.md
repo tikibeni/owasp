@@ -26,9 +26,9 @@ Injection info goes here. Also XSS belongs here.
 public. Also, if this application would be running in development, the debug-mode is left on. The debug-mode
 could enable the visibility of private information for example through console logs.
 
-*Fix:* Remove the secret key from the version control and start using some library, which handles environmental variables, 
-such as [dotenv](https://pypi.org/project/python-dotenv/). Also disable debug-mode in production and leave the mode managing
-to dotenv.
+*Fix:* Remove the secret key from the version control and start using some library, which handles environmental 
+variables, such as [dotenv](https://pypi.org/project/python-dotenv/). Also disable debug-mode in production and leave 
+the mode managing to dotenv.
 
 ---
 
@@ -48,4 +48,24 @@ Outdated Django e.g.
 
 ## [A07:2021-Identification and Authentication Failures](https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/)
 
-Password bruteforcing.
+*Location*: Overall. You can run the provided sniffing [tool](../hack/brute.py) by starting the server and:
+
+```shell
+~/owasp/hack$ python3 brute.py
+```
+
+The tool will then print the password if the login works. Therefore, it should print the value `admin` to the console.
+
+*Description:* The backend (and of course frontend) of the application makes it possible to bruteforce passwords as it 
+does not check anything else than if the strings match. I initialized a simple bruteforcing tool to sniff out the 
+password inside the [hack](../hack)-directory. You might recognize that the [brute.py](../hack/brute.py) is overall the 
+same tool used in [Securing Software 4-19](https://cybersecuritybase.mooc.fi/module-2.4/1-finding). It relies on the 
+fact that a username with a value "admin" exists. It then attempts to log in with the common passwords provided in 
+[force.txt](../hack/force.txt). The bruteforcing is made possible via not limiting the amount of attempts in any way and
+using a simple "username-password-form" type of login.
+
+*Fix:* There are many ways to prevent auth-forcing. Few examples are: 
+
+- limiting the amount of login attempts per timespan
+- initializing captcha within the login
+- multi-factor-authentication (MFA)
