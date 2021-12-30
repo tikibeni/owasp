@@ -1,6 +1,6 @@
 # Five OWASP-10 (2021) Flaws
 
-Here I have listed six security flaws inside the Python-Django template application some of which are implicitly created
+Here I have listed five security flaws within a Python-Django template application some of which are implicitly created
 and some of which are already inside the template.
 
 ---
@@ -82,9 +82,6 @@ password "admin". Default credentials greatly increase the risk of account theft
 framework said it's not a good idea. Use usernames & passwords with special characters, different capitalizations and
 numbers. One efficient way of ensuring strong credentials is using a password handling program, such as F-Secure ID
 Protection.
-
-
-The software is out of date or vulnerable (A06)
 
 ---
 
