@@ -3,6 +3,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
 {% if latest_question_list %}
+<h3>Questions</h3>
+<form action="search/">
+    <label>Search questions:</label>
+    <input type="search" name="filter" />
+    <button type="submit">Search</button>
+</form>
 <ul>
     {% for question in latest_question_list %}
     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>

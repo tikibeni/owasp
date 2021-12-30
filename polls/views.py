@@ -54,3 +54,13 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+def search(request):
+    param = request.GET['filter']
+    query = "SELECT id, question_text FROM polls_question WHERE question_text LIKE '%%%s%%'" % str(param)
+    questions = Question.objects.raw(query)
+
+    return render(request, 'polls/search.html', {
+        'fetched_questions': questions
+    })

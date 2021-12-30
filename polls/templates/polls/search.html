@@ -1,0 +1,17 @@
+<h2>Results</h2>
+<table>
+    <tr>
+        <th>
+            Question:
+        </th>
+    </tr>
+    {% for question in fetched_questions %}
+    <tr>
+        <th>
+            <a href="/{{ question.id }}/">{{ question.question_text }}</a>
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+
+<button type="submit"><a href="/">Back to main page</a></button>

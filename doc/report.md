@@ -1,4 +1,4 @@
-# Six OWASP-10 (2021) Flaws
+# Five OWASP-10 (2021) Flaws
 
 Here I have listed six security flaws inside the Python-Django template application some of which are implicitly created
 and some of which are already inside the template.
@@ -10,8 +10,8 @@ and some of which are already inside the template.
 *Location:* Overall backend [settings & configuration](../mysite).
 
 *Description:* The application uses HTTP instead of HTTPS. Therefore, the data transmitted via HTTP is not encrypted
-anyhow and can be seen as clear text. This enables man-in-the-middle attacks. In addition, it is not clear if the 
-backend uses any hashing algorithms for the user credentials. Using HTTPS might also prevent cases of A07:2021.
+anyhow and can be seen as clear text. This enables man-in-the-middle attacks. In addition, it is not clear how up to 
+date the template backend's hashing algorithms are. Using HTTPS might also prevent cases of A07:2021.
 
 *Fix:* Switch to HTTPS, secure cookies and use up-to-date hashing algorithms. Here are some steps:
 
@@ -38,7 +38,20 @@ Just sets the environmental value of HTTPS to true.
 
 ## [A03:2021-Injection](https://owasp.org/Top10/A03_2021-Injection/)
 
-Injection info goes here. Also XSS belongs here.
+*Location:* [views.py](../polls/views.py) lines 61-62.
+
+*Description:* The application contains unsanitized query within the views-file. Injection can be caused by following
+these steps:
+
+1. Run the server and go to http://127.0.0.1:8000/
+2. Search for `doesnotexist' union select email, username from auth_user where is_superuser = 1 --`
+
+You should now be looking at a link, which contains the superuser's username. The actual URL contains the email address
+linked to the superuser. You can also change the parameters for example from email to password. After this the resulting
+url will look like the hashed version of the password.
+
+*Fix:* Sanitize inputs, don't mix raw input vars with queries. This flaw was artificially constructed to specifically use 
+Django's `raw` query.
 
 ---
 
@@ -72,12 +85,6 @@ Protection.
 
 
 The software is out of date or vulnerable (A06)
-
----
-
-## [A06:2021-Vulnerable and Outdated Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)
-
-Outdated Django e.g.
 
 ---
 
