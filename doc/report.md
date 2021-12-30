@@ -76,7 +76,7 @@ the mode managing to dotenv.
 
 *Description:* One of the listed security misconfigurations is "Default accounts and their passwords are still enabled
 and unchanged." This template application utilizes a superuser with default credentials, which are: username "admin" and
-password "admin". Default credentials greatly increase the risk of account theft and cases of A06.
+password "admin". Default credentials greatly increase the risk of account theft and cases of A07.
 
 *Fix:* Never use default credentials. I forcefully created a superuser with default credentials even though the
 framework said it's not a good idea. Use usernames & passwords with special characters, different capitalizations and
